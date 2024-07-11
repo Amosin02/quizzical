@@ -1,7 +1,7 @@
 export default function QuestionPage(props) {
   return (
     <>
-      <h4>Question1</h4>
+      <h4>{props.question}</h4>
       <input type="radio" name="q1" id="q1choice1" />
       <input type="radio" name="q1" id="q1choice1" />
       <input type="radio" name="q1" id="q1choice1" />

@@ -1,18 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
-import QuestionPage from './components/questionPage.jsx';
+import AnswerPage from './components/AnswerPage';
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [displayQuestion, setDisplayQuestion] = useState(false);
+  const handleClick = () => {
+    console.log('check');
+  };
 
   return (
     <main>
-      <div className="intro-page">
+      <main className="intro-page">
         <h1>Quizzical</h1>
-        <button className="intro-btn">Start Quiz</button>
-      </div>
-      <QuestionPage />
+        <a href={`/question`}>
+          <button className="intro-btn">Start quiz</button>
+        </a>
+      </main>
     </main>
   );
 }

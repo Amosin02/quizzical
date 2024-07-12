@@ -3,6 +3,7 @@ import './App.css';
 import AnswerPage from './components/AnswerPage';
 import QuestionPage from './components/QuestionPage';
 import he from 'he';
+import BackdropDesign from './components/BackdropDesign';
 
 function App() {
   const [questionData, setQuestionData] = useState(null);
@@ -27,6 +28,7 @@ function App() {
 
   return (
     <main className="intro-page">
+      <BackdropDesign />
       <h1>Quizzical</h1>
       <a href={`/question`}>
         <button className="intro-btn">Start quiz</button>

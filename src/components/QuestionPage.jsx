@@ -1,6 +1,9 @@
+import BackdropDesign from './BackdropDesign';
+
 export default function QuestionPage(props) {
   return (
     <>
+      <BackdropDesign />
       <h4>{props.question}</h4>
       <input type="radio" name="q1" id="q1choice1" />
       <input type="radio" name="q1" id="q1choice1" />

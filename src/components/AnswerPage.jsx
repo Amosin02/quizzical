@@ -1,6 +1,9 @@
+import BackdropDesign from './BackdropDesign';
+
 export default function AnswerPage() {
   return (
     <main>
+      <BackdropDesign />
       <h4>Question</h4>
       <p>Right answer</p>
       <p>wrong answer</p>

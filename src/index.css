@@ -34,15 +34,6 @@ h1 {
 }
 
 button {
-  /* border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #4d5b9e;
-  cursor: pointer;
-  transition: border-color 0.25s; */
   width: 150px;
   height: 35px;
   border-radius: 8px;
@@ -51,6 +42,28 @@ button {
   color: #f5f7fb;
   font-weight: 1000;
   cursor: pointer;
+}
+
+.oval1 {
+  height: 250px;
+  width: 200px;
+  background-color: #f2eeaa;
+  border-radius: 50%;
+  transform: rotate(150deg);
+  position: absolute;
+  top: -90px;
+  right: -90px;
+}
+
+.oval2 {
+  height: 250px;
+  width: 300px;
+  background-color: #e0e9f8;
+  border-radius: 35%;
+  transform: rotate(170deg);
+  position: absolute;
+  left: -100px;
+  bottom: -150px;
 }
 
 button:hover {

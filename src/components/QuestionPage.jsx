@@ -4,18 +4,9 @@ export default function QuestionPage(props) {
   return (
     <>
       <BackdropDesign />
-      <h4>{props.question}</h4>
-      <input type="radio" name="q1" id="q1choice1" />
-      <input type="radio" name="q1" id="q1choice1" />
-      <input type="radio" name="q1" id="q1choice1" />
-      <input type="radio" name="q1" id="q1choice1" />
-      <hr />
-      <h4>Question2</h4>
-      <input type="radio" name="q2" id="q2choice1" />
-      <input type="radio" name="q2" id="q2choice1" />
-      <input type="radio" name="q2" id="q2choice1" />
-      <input type="radio" name="q2" id="q2choice1" />
-      <hr />
+      <h4>{props.questionArr[0]}</h4>
+      <p>{props.wrong_choices}</p>
+      <p>{props.right_choice}</p>
       <a href={`/answers`}>
         <button>Check answers</button>
       </a>

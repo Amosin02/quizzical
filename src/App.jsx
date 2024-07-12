@@ -4,27 +4,29 @@ import AnswerPage from './components/AnswerPage';
 import QuestionPage from './components/QuestionPage';
 import he from 'he';
 import BackdropDesign from './components/BackdropDesign';
+import axios from 'axios';
 
 function App() {
-  const [questionData, setQuestionData] = useState(null);
-  // const [questions, setQuestions] = useState([]);
+  const [questionData, setQuestionData] = useState([]);
 
   useEffect(() => {
-    fetch('https://opentdb.com/api.php?amount=5')
-      .then((res) => res.json())
-      .then((data) => setQuestionData(data.results));
+    async function fetchData() {
+      const response = await axios.get('https://opentdb.com/api.php?amount=5');
+      setQuestionData(response.data.results);
+    }
+    fetchData();
   }, []);
 
-  // function putDataInAnswerPage() {
-  //   questionData.results.map((item) => {
-  //     setQuestions(item.question);
-  //   });
-  // }
+  const question = questionData.map((item) => he.decode(item.question));
+  const quizElements = questionData.map((item) => (
+    <QuestionPage
+      questionArr={question}
+      wrong_choices={item.incorrect_answers}
+      right_choice={item.correct_answer}
+    />
+  ));
 
-  if (questionData) {
-    const questions = questionData.map((item) => he.decode(item.question));
-    console.log(questions);
-  }
+  // fixing props
 
   return (
     <main className="intro-page">
@@ -35,6 +37,7 @@ function App() {
       </a>
       {false && <QuestionPage />}
       {false && <AnswerPage />}
+      {false && quizElements}
     </main>
   );
 }

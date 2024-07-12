@@ -53,6 +53,7 @@ button {
   position: absolute;
   top: -90px;
   right: -90px;
+  clip-path: polygon();
 }
 
 .oval2 {

@@ -5,6 +5,7 @@ import QuestionPage from './components/QuestionPage';
 import he from 'he';
 import BackdropDesign from './components/BackdropDesign';
 import axios from 'axios';
+import { nanoid } from 'nanoid';
 
 function App() {
   const [questionData, setQuestionData] = useState([]);
@@ -17,16 +18,15 @@ function App() {
     fetchData();
   }, []);
 
-  const question = questionData.map((item) => he.decode(item.question));
-  const quizElements = questionData.map((item) => (
+  // fixing props
+  const toComponents = questionData.map((item) => (
     <QuestionPage
-      questionArr={question}
-      wrong_choices={item.incorrect_answers}
-      right_choice={item.correct_answer}
+      key={nanoid()}
+      question={he.decode(item.question)}
+      correctAns={he.decode(item.correct_answer)}
+      choices={item.incorrect_answers}
     />
   ));
-
-  // fixing props
 
   return (
     <main className="intro-page">
@@ -35,9 +35,7 @@ function App() {
       <a href={`/question`}>
         <button className="intro-btn">Start quiz</button>
       </a>
-      {false && <QuestionPage />}
-      {false && <AnswerPage />}
-      {false && quizElements}
+      {toComponents}
     </main>
   );
 }

@@ -10,6 +10,11 @@ import Intro from './components/Intro';
 
 function App() {
   const [questionData, setQuestionData] = useState([]);
+  const quizObject = {
+    question: [],
+    choices: [],
+    correct_answer: [],
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -19,12 +24,13 @@ function App() {
     fetchData();
   }, []);
 
-  // fixing props
-  const questions = questionData.map((quiz) => he.decode(quiz.question));
-  const choices = questionData.map((quiz) => quiz.incorrect_answers);
-  const correctAnswer = questionData.map((quiz) => quiz.correct_answer);
+  quizObject.question = questionData.map((quiz) => he.decode(quiz.question));
+  quizObject.choices = questionData.map((quiz) => quiz.incorrect_answers);
+  quizObject.correct_answer = questionData.map((quiz) =>
+    he.decode(quiz.correct_answer)
+  );
 
-  console.log(questionData);
+  console.log(quizObject);
 
   return (
     <BrowserRouter>
@@ -32,13 +38,7 @@ function App() {
         <Route exact path="/" element={<Intro />} />
         <Route
           path="question"
-          element={
-            <QuestionPage
-              question={questions}
-              choices={choices}
-              correctAnswer={correctAnswer}
-            />
-          }
+          element={<QuestionPage quizObject={quizObject} />}
         />
         <Route path="answers" element={<AnswerPage />} />
       </Routes>

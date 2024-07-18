@@ -25,12 +25,24 @@ function App() {
   }, []);
 
   quizObject.question = questionData.map((quiz) => he.decode(quiz.question));
-  quizObject.choices = questionData.map((quiz) => quiz.incorrect_answers);
   quizObject.correct_answer = questionData.map((quiz) =>
     he.decode(quiz.correct_answer)
   );
 
-  console.log(quizObject);
+  const undecoded = questionData.map((quiz) => quiz.incorrect_answers);
+  const decoded = undecoded.map((item) => item.map((item) => he.decode(item)));
+  function choices(correctAns, incorrectAns) {
+    const hold = [];
+    correctAns.map((value, index) => {
+      const holder = [];
+      holder.push(value);
+      incorrectAns[index].map((item) => holder.push(item));
+      hold.push(holder);
+    });
+    return hold;
+  }
+
+  quizObject.choices = choices(quizObject.correct_answer, decoded);
 
   return (
     <BrowserRouter>

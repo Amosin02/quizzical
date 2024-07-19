@@ -15,6 +15,7 @@ function App() {
     choices: [],
     correct_answer: [],
   };
+  const [response, setResponse] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -54,13 +55,34 @@ function App() {
 
   quizObject.choices = unshuffled.map((shuffled) => shuffle(shuffled));
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    console.log(event.target);
+    const holder = [];
+
+    for (let x = 0; x < 5; x++) {
+      const test = document.getElementsByName(`${x}`);
+
+      for (let i = 0; i < test.length; i++) {
+        if (test[i].checked) {
+          holder.push(test[i].value);
+        }
+      }
+    }
+    setResponse(holder);
+  }
+
+  console.log(response);
+
   return (
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<Intro />} />
         <Route
           path="question"
-          element={<QuestionPage quizObject={quizObject} />}
+          element={
+            <QuestionPage quizObject={quizObject} handleSubmit={handleSubmit} />
+          }
         />
         <Route path="answers" element={<AnswerPage />} />
       </Routes>

@@ -25,6 +25,15 @@ body {
   width: 500px;
 }
 
+.choices {
+  background-color: red;
+}
+
+.choices input,
+.choices label {
+  display: block;
+}
+
 h1 {
   font-size: 2rem;
   line-height: 1.1;

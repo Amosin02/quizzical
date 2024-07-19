@@ -2,21 +2,35 @@ import BackdropDesign from './BackdropDesign';
 
 export default function QuestionPage(props) {
   const quiz = props.quizObject;
+
+  // function handleChange(event) {
+  //   console.log(event.target.value);
+  // }
   // console.log(quiz);
 
   const Queries = ({ question, choices }) => {
     return (
       <>
-        {question.map((question, index) => (
-          <div key={index}>
-            <h4>{question}</h4>
-            <ul>
+        <form className="choices" id="forms" onSubmit={props.handleSubmit}>
+          {question.map((question, index) => (
+            <div key={index}>
+              <h4>{question}</h4>
               {choices[index].map((choice, innerIndex) => (
-                <li key={innerIndex}>{choice}</li>
+                // <ul className={`choice ${innerIndex}`} key={innerIndex}>
+                <div key={innerIndex}>
+                  <input type="radio" name={index} value={choice} id={index} />
+                  <label htmlFor={innerIndex}>{choice}</label>
+                </div>
+
+                // </ul>
               ))}
-            </ul>
-          </div>
-        ))}
+            </div>
+          ))}
+          <a href={`/answers`}>
+            {/* <button>Check answers</button> */}
+            <input type="submit" value="Check answers" />
+          </a>
+        </form>
       </>
     );
   };
@@ -24,9 +38,6 @@ export default function QuestionPage(props) {
   return (
     <main className="question-page">
       <Queries question={quiz.question} choices={quiz.choices} />
-      <a href={`/answers`}>
-        <button>Check answers</button>
-      </a>
     </main>
   );
 }

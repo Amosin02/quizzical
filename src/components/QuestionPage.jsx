@@ -21,9 +21,7 @@ export default function QuestionPage(props) {
               ))}
             </div>
           ))}
-          {/* <Link to={`/answers`}> */}
           <input type="submit" value="Check answers" />
-          {/* </Link> */}
         </form>
       </>
     );

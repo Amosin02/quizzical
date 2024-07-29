@@ -5,7 +5,7 @@ import QuestionPage from './components/QuestionPage';
 import he from 'he';
 import axios from 'axios';
 import { nanoid } from 'nanoid';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import Intro from './components/Intro';
 
 function App() {
@@ -15,7 +15,8 @@ function App() {
     choices: [],
     correct_answer: [],
   };
-  const [response, setResponse] = useState([]);
+  const [playerAnswer, setPlayerAnswer] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
@@ -57,7 +58,6 @@ function App() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(event.target);
     const holder = [];
 
     for (let x = 0; x < 5; x++) {
@@ -69,24 +69,27 @@ function App() {
         }
       }
     }
-    setResponse(holder);
+    setPlayerAnswer(holder);
+    navigate('/answers');
   }
-
-  console.log(response);
+  console.log(playerAnswer);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route exact path="/" element={<Intro />} />
-        <Route
-          path="question"
-          element={
-            <QuestionPage quizObject={quizObject} handleSubmit={handleSubmit} />
-          }
-        />
-        <Route path="answers" element={<AnswerPage />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route exact path="/" element={<Intro />} />
+      <Route
+        path="question"
+        element={
+          <QuestionPage quizObject={quizObject} handleSubmit={handleSubmit} />
+        }
+      />
+      <Route
+        path="answers"
+        element={
+          <AnswerPage quizObject={quizObject} playerAnswer={playerAnswer} />
+        }
+      />
+    </Routes>
   );
 }
 

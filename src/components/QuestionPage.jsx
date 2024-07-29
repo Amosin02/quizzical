@@ -1,12 +1,10 @@
 import BackdropDesign from './BackdropDesign';
+import { Link } from 'react-router-dom';
 
 export default function QuestionPage(props) {
   const quiz = props.quizObject;
 
-  // function handleChange(event) {
-  //   console.log(event.target.value);
-  // }
-  // console.log(quiz);
+  function onClick() {}
 
   const Queries = ({ question, choices }) => {
     return (
@@ -16,20 +14,16 @@ export default function QuestionPage(props) {
             <div key={index}>
               <h4>{question}</h4>
               {choices[index].map((choice, innerIndex) => (
-                // <ul className={`choice ${innerIndex}`} key={innerIndex}>
                 <div key={innerIndex}>
                   <input type="radio" name={index} value={choice} id={index} />
                   <label htmlFor={innerIndex}>{choice}</label>
                 </div>
-
-                // </ul>
               ))}
             </div>
           ))}
-          <a href={`/answers`}>
-            {/* <button>Check answers</button> */}
-            <input type="submit" value="Check answers" />
-          </a>
+          {/* <Link to={`/answers`}> */}
+          <input type="submit" value="Check answers" />
+          {/* </Link> */}
         </form>
       </>
     );

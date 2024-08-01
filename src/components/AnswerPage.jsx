@@ -1,11 +1,22 @@
 import BackdropDesign from './BackdropDesign';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export default function AnswerPage(props) {
   const quiz = props.quizObject;
-  console.log(quiz);
 
-  console.log(props.playerAnswer);
+  useEffect(() => {
+    function checkAnswers() {
+      for (let i = 0; i < props.playerAnswer.length; i++) {
+        if (props.playerAnswer[i] === quiz.correct_answer[i]) {
+          console.log(`correct question ${i + 1}`);
+        }
+      }
+    }
+
+    checkAnswers();
+  }, []);
+
   const Queries = ({ question, choices }) => {
     return (
       <>
@@ -15,7 +26,6 @@ export default function AnswerPage(props) {
               <h4>{question}</h4>
               {choices[index].map((choice, innerIndex) => (
                 <div key={innerIndex}>
-                  {/* <input type="radio" name={index} value={choice} id={index} /> */}
                   {props.playerAnswer[index] === choice ? (
                     <input
                       type="radio"

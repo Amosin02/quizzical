@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 export default function QuestionPage(props) {
   const quiz = props.quizObject;
 
-  function onClick() {}
-
   const Queries = ({ question, choices }) => {
     return (
       <>

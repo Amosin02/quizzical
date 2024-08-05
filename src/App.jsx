@@ -11,11 +11,12 @@ import Intro from './components/Intro';
 function App() {
   const [questionData, setQuestionData] = useState([]);
   const quizObject = {
-    question: [],
-    choices: [],
     correct_answer: [],
   };
   const [playerAnswer, setPlayerAnswer] = useState([]);
+  const [quizQuestion, setQuizQuestion] = useState([]);
+  const [quizChoices, setQuizChoices] = useState([]);
+  const [quizCorrectAnswer, setQuizCorrectAnswer] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,25 +27,38 @@ function App() {
     fetchData();
   }, []);
 
-  quizObject.question = questionData.map((quiz) => he.decode(quiz.question));
   quizObject.correct_answer = questionData.map((quiz) =>
     he.decode(quiz.correct_answer)
   );
 
-  const undecoded = questionData.map((quiz) => quiz.incorrect_answers);
-  const decoded = undecoded.map((item) => item.map((item) => he.decode(item)));
-  function choices(correctAns, incorrectAns) {
-    const hold = [];
-    correctAns.map((value, index) => {
-      const holder = [];
-      holder.push(value);
-      incorrectAns[index].map((item) => holder.push(item));
-      hold.push(holder);
-    });
-    return hold;
-  }
+  useEffect(() => {
+    setQuizQuestion(questionData.map((quiz) => he.decode(quiz.question)));
+    setQuizCorrectAnswer(
+      questionData.map((quiz) => he.decode(quiz.correct_answer))
+    );
 
-  const unshuffled = choices(quizObject.correct_answer, decoded);
+    function getChoices() {
+      const undecoded = questionData.map((quiz) => quiz.incorrect_answers);
+      const decoded = undecoded.map((item) =>
+        item.map((item) => he.decode(item))
+      );
+
+      function choices(correctAns, incorrectAns) {
+        const hold = [];
+        correctAns.map((value, index) => {
+          const holder = [];
+          holder.push(value);
+          incorrectAns[index].map((item) => holder.push(item));
+          hold.push(holder);
+        });
+        return hold;
+      }
+      const unshuffled = choices(quizObject.correct_answer, decoded);
+      setQuizChoices(unshuffled.map((items) => shuffle(items)));
+    }
+
+    getChoices();
+  }, [questionData]);
 
   const shuffle = (arr) => {
     for (let i = arr.length - 1; i > 0; i--) {
@@ -53,8 +67,6 @@ function App() {
     }
     return arr;
   };
-
-  quizObject.choices = unshuffled.map((shuffled) => shuffle(shuffled));
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -72,7 +84,7 @@ function App() {
     setPlayerAnswer(holder);
     navigate('/answers');
   }
-  console.log(playerAnswer);
+  // console.log(playerAnswer); ion mo na lang laterrrrrr
 
   return (
     <Routes>
@@ -80,13 +92,22 @@ function App() {
       <Route
         path="question"
         element={
-          <QuestionPage quizObject={quizObject} handleSubmit={handleSubmit} />
+          <QuestionPage
+            quizChoices={quizChoices}
+            quizQuestion={quizQuestion}
+            handleSubmit={handleSubmit}
+          />
         }
       />
       <Route
         path="answers"
         element={
-          <AnswerPage quizObject={quizObject} playerAnswer={playerAnswer} />
+          <AnswerPage
+            quizQuestion={quizQuestion}
+            quizChoices={quizChoices}
+            quizCorrectAnswer={quizCorrectAnswer}
+            playerAnswer={playerAnswer}
+          />
         }
       />
     </Routes>

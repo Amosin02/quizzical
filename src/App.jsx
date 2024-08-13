@@ -21,8 +21,14 @@ function App() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get('https://opentdb.com/api.php?amount=5');
-      setQuestionData(response.data.results);
+      try {
+        const response = await axios.get(
+          'https://opentdb.com/api.php?amount=5'
+        );
+        setQuestionData(response.data.results);
+      } catch (err) {
+        console.log(err);
+      }
     }
     fetchData();
   }, []);
@@ -84,7 +90,6 @@ function App() {
     setPlayerAnswer(holder);
     navigate('/answers');
   }
-  // console.log(playerAnswer); ion mo na lang laterrrrrr
 
   return (
     <Routes>

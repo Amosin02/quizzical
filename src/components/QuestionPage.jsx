@@ -14,9 +14,9 @@ export default function QuestionPage(props) {
                       type="radio"
                       name={index}
                       value={choice}
-                      id={index}
+                      id={`${innerIndex} ${index}`}
                     />
-                    <label className="lbl" htmlFor={innerIndex}>
+                    <label className="lbl" htmlFor={`${innerIndex} ${index}`}>
                       {choice}
                     </label>
                   </div>

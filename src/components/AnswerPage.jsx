@@ -1,19 +1,28 @@
 import BackdropDesign from './BackdropDesign';
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function AnswerPage(props) {
+  const [totalText, setTotalText] = useState('');
   useEffect(() => {
+    let total = 0;
     function checkAnswers() {
       for (let i = 0; i < props.playerAnswer.length; i++) {
         if (props.playerAnswer[i] === props.quizCorrectAnswer[i]) {
+          total += 1;
           console.log(`correct question ${i + 1}`);
+        } else {
         }
       }
+      setTotalText(`You scored ${total}/5 correct answers`);
     }
 
     checkAnswers();
   }, []);
+
+  function testClick(ind) {
+    console.log(ind);
+  }
 
   const Queries = ({ question, choices }) => {
     return (
@@ -25,26 +34,32 @@ export default function AnswerPage(props) {
               <div className="choices">
                 {choices[index].map((choice, innerIndex) => (
                   <div key={innerIndex}>
-                    {props.playerAnswer[index] === choice ? (
-                      <input
-                        className="checkmark"
-                        type="radio"
-                        name={index}
-                        value={choice}
-                        id={index}
-                        checked="checked"
-                        readOnly
-                      />
-                    ) : (
-                      <input
-                        className="checkmark"
-                        type="radio"
-                        name={index}
-                        value={choice}
-                        id={index}
-                      />
-                    )}
-                    <label className="lbl" htmlFor={innerIndex}>
+                    {console.log(props.quizCorrectAnswer[index])}
+                    {props.playerAnswer[index] === choice
+                      ? props.playerAnswer[index] ===
+                          props.quizCorrectAnswer[index] && (
+                          <input
+                            className="checkmark-ans correct"
+                            type="radio"
+                            name={index}
+                            value={choice}
+                            id={index}
+                            checked
+                            readOnly
+                          />
+                        )
+                      : choice === props.quizCorrectAnswer && (
+                          <input
+                            className="wrong"
+                            type="input"
+                            name={index}
+                            value={choice}
+                            id={`${innerIndex} ${index}`}
+                            checked
+                            readOnly
+                          />
+                        )}
+                    <label className="lbl" htmlFor={`${innerIndex} ${index}`}>
                       {choice}
                     </label>
                   </div>
@@ -62,6 +77,7 @@ export default function AnswerPage(props) {
     <main>
       <Queries question={props.quizQuestion} choices={props.quizChoices} />
       <div className="btn-container">
+        <p>{totalText}</p>
         <Link to={`/`}>
           <input className="btn" type="button" value="Play Again" />
         </Link>

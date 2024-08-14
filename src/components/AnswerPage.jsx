@@ -34,32 +34,33 @@ export default function AnswerPage(props) {
               <div className="choices">
                 {choices[index].map((choice, innerIndex) => (
                   <div key={innerIndex}>
-                    {console.log(props.quizCorrectAnswer[index])}
-                    {props.playerAnswer[index] === choice
-                      ? props.playerAnswer[index] ===
-                          props.quizCorrectAnswer[index] && (
-                          <input
-                            className="checkmark-ans correct"
-                            type="radio"
-                            name={index}
-                            value={choice}
-                            id={index}
-                            checked
-                            readOnly
-                          />
-                        )
-                      : choice === props.quizCorrectAnswer && (
-                          <input
-                            className="wrong"
-                            type="input"
-                            name={index}
-                            value={choice}
-                            id={`${innerIndex} ${index}`}
-                            checked
-                            readOnly
-                          />
-                        )}
-                    <label className="lbl" htmlFor={`${innerIndex} ${index}`}>
+                    {console.log(props.quizCorrectAnswer)}
+                    {choice === props.quizCorrectAnswer[index] ? (
+                      <input
+                        className="checkmark-ans correct"
+                        type="radio"
+                        name={`${innerIndex} ${index}`}
+                        value={choice}
+                        id={`${innerIndex} ${index}`}
+                        checked
+                        readOnly
+                      />
+                    ) : (
+                      choice === props.playerAnswer[index] && (
+                        <input
+                          className="wrong"
+                          type="radio"
+                          name={`${innerIndex} ${index}`}
+                          value={choice}
+                          id={`${innerIndex} ${index}`}
+                          checked
+                          readOnly
+                        />
+                      )
+                    )}
+                    <label
+                      className="lbl answer-page"
+                      htmlFor={`${innerIndex} ${index}`}>
                       {choice}
                     </label>
                   </div>

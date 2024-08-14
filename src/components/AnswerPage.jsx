@@ -34,7 +34,6 @@ export default function AnswerPage(props) {
               <div className="choices">
                 {choices[index].map((choice, innerIndex) => (
                   <div key={innerIndex}>
-                    {console.log(props.quizCorrectAnswer)}
                     {choice === props.quizCorrectAnswer[index] ? (
                       <input
                         className="checkmark-ans correct"

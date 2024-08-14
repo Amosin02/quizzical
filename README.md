@@ -1,8 +1,3 @@
-# React + Vite
+A solo project that comes with the Learn React from roadmap.sh. The project is a webapp that gets 5 questions from an api and the user should answer the 5 questions. A simple game about interesting topics.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Project is still ongoing (just designs mostly)

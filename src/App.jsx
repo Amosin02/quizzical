@@ -4,8 +4,7 @@ import AnswerPage from './components/AnswerPage';
 import QuestionPage from './components/QuestionPage';
 import he from 'he';
 import axios from 'axios';
-import { nanoid } from 'nanoid';
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import Intro from './components/Intro';
 
 function App() {
@@ -22,7 +21,7 @@ function App() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get(
+        const response = await axios.request(
           'https://opentdb.com/api.php?amount=5'
         );
         setQuestionData(response.data.results);

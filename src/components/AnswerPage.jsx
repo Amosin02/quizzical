@@ -1,4 +1,3 @@
-import BackdropDesign from './BackdropDesign';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
@@ -10,7 +9,6 @@ export default function AnswerPage(props) {
       for (let i = 0; i < props.playerAnswer.length; i++) {
         if (props.playerAnswer[i] === props.quizCorrectAnswer[i]) {
           total += 1;
-          console.log(`correct question ${i + 1}`);
         } else {
         }
       }
